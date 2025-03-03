@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
     model = NERModel(
         "bert",
-        "bert-large-cased",
+        "bert-base-cased",
         args=model_args,
         use_cuda=torch.cuda.is_available(),
         labels=labels,
