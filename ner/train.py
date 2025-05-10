@@ -38,8 +38,8 @@ if __name__ == '__main__':
     all_eval_results = []
     # Configure the model
     model_args = NERArgs()
-    model_args.train_batch_size = 8
-    model_args.eval_batch_size = 8
+    model_args.train_batch_size = 16
+    model_args.eval_batch_size = 16
     model_args.adam_epsilon = 1e-5
     model_args.max_grad_norm = 1.0
     model_args.max_seq_length = 128
@@ -49,15 +49,14 @@ if __name__ == '__main__':
     model_args.overwrite_output_dir = True
     model_args.learning_rate = 2e-5
   #  model_args.gradient_accumulation_steps = 1
-    model_args.num_train_epochs = 1
- #   model_args.weight_decay = 0.01
-    model_args.config = {"dropout": 0.02}
+    model_args.num_train_epochs = 3
+    model_args.weight_decay = 0.01
+    model_args.config = {"dropout": 0.1}
     model_args.optimizer = "AdamW"
     model_args.wandb_project = "NER"
 
 
     labels = df["labels"].unique().tolist()
-
 
     model = NERModel(
         "bert",
