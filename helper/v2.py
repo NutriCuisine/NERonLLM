@@ -1,10 +1,8 @@
 import ast
-import os
 import re
 import unicodedata
 from fractions import Fraction
 import json
-import matplotlib.pyplot as plt
 import pandas as pd
 import torch
 from simpletransformers.ner import NERModel
@@ -12,13 +10,13 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MultiLabelBinarizer
 from torch.nn import BCEWithLogitsLoss
-from torch.nn.utils.rnn import pad_sequence
 from torch.optim import AdamW
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sklearn.metrics import f1_score, precision_score, recall_score, accuracy_score, hamming_loss
 from tqdm import tqdm
 import os
+from approximate_randomization import chanceByChanceDataFrame
 
 
 class MultiLabel:
@@ -169,6 +167,8 @@ class MultiLabel:
 
     def train_model(self):
         final_reports = []
+        comparison_data = []  # List to store metrics for comparison
+        
         df = pd.read_csv(self.dataset_with_ner)
         df["diets"] = df["diets"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
         df["diets"] = df["diets"].apply(lambda x: [item.lower() for item in x])
@@ -179,7 +179,6 @@ class MultiLabel:
             if ner_flag:
                 print("Starting with NER results..")
                 df = df[["ner_results", "diets"]]
-                # For NER results, we don't need to use literal_eval since it's already a string
                 df["processed_ingredients"] = df["ner_results"].apply(lambda x: x if isinstance(x, str) else " ".join(x))
             else:
                 print("Starting without NER results..")
@@ -229,8 +228,10 @@ class MultiLabel:
 
             # Initialize tokenizer and model
             for model_name in self.config["model_names"]:
-                print("Model name:", model_name)
-                # Create new dictionary for each model and NER flag combination
+                print(f"\n{'='*50}")
+                print(f"Training {model_name}")
+                print(f"{'='*50}")
+                
                 model_report = {
                     "ner_flag": ner_flag,
                     "model_name": model_name,
@@ -415,13 +416,78 @@ class MultiLabel:
                     "test_classification_report": classification_report(test_labels, test_preds, target_names=self.filtered_list)
                 }
 
+                # After final test evaluation, store metrics for comparison
+                comparison_data.append({
+                    'approach': 'with_ner' if ner_flag else 'without_ner',
+                    'model': model_name,
+                    'f1_score': float(test_f1),
+                    'precision': float(test_precision),
+                    'recall': float(test_recall),
+                    'accuracy': float(test_accuracy),
+                    'hamming_loss': float(test_h_loss)
+                })
+
                 # Add model report to final reports
                 final_reports.append(model_report)
+
+        # Create comparison DataFrame
+        comparison_df = pd.DataFrame(comparison_data)
+        
+        # Perform statistical comparison for each model and metric
+        metrics = ['f1_score', 'precision', 'recall', 'accuracy', 'hamming_loss']
+        comparison_results = {}
+        
+        print("\nStatistical Comparison Results:")
+        print(f"{'='*50}")
+        
+        for model_name in self.config["model_names"]:
+            print(f"\nModel: {model_name}")
+            print(f"{'='*30}")
+            
+            model_df = comparison_df[comparison_df['model'] == model_name]
+            model_results = {}
+            
+            for metric in metrics:
+                p_value = chanceByChanceDataFrame(
+                    model_df,
+                    split_column='approach',
+                    compare_column=metric,
+                    left_value='with_ner',
+                    right_value='without_ner',
+                    repetitions=1000
+                )
+                
+                with_ner_value = float(model_df[model_df['approach'] == 'with_ner'][metric].values[0])
+                without_ner_value = float(model_df[model_df['approach'] == 'without_ner'][metric].values[0])
+                diff = with_ner_value - without_ner_value
+                
+                model_results[metric] = {
+                    'p_value': float(p_value),
+                    'is_significant': bool(p_value < 0.05),
+                    'with_ner': with_ner_value,
+                    'without_ner': without_ner_value,
+                    'difference': float(diff)
+                }
+                
+                print(f"\n{metric}:")
+                print(f"P-value: {p_value:.4f}")
+                if p_value < 0.05:
+                    print(f"  - Statistically significant difference in {metric}")
+                    print(f"  - Difference: {diff:.4f} ({'+' if diff > 0 else ''}{diff:.4f})")
+                    print(f"  - With NER: {with_ner_value:.4f}")
+                    print(f"  - Without NER: {without_ner_value:.4f}")
+                else:
+                    print(f"  - No statistically significant difference in {metric}")
+            
+            comparison_results[model_name] = model_results
 
         # Save all results to a JSON file
         results_file = f"{project_path}/training_results.json"
         with open(results_file, 'w') as f:
-            json.dump(final_reports, f, indent=4)
+            json.dump({
+                'model_reports': final_reports,
+                'statistical_comparison': comparison_results
+            }, f, indent=4)
         print(f"\nAll results saved to {results_file}")
 
         return model, mlb
@@ -434,12 +500,11 @@ if __name__ == "__main__":
 
     config = {
         "batch_size": 8,
-        "num_epochs": 4,
+        "num_epochs": 6,
         "dataset_path": project_path + "/datasets/",
         "model_names": [
             "bert-base-uncased",
             "FacebookAI/roberta-base",
-            "albert/albert-base-v2",
             "distilbert/distilbert-base-uncased"
         ],
     }

@@ -1,27 +1,6 @@
 import numpy as np
 
 
-def meandiff(sample1, sample2):
-    mean1 = np.mean(sample1)
-    mean2 = np.mean(sample2)
-    diff = abs(mean1 - mean2)
-    return diff
-
-
-def meangt(sample1, sample2):
-    mean1 = np.mean(sample1)
-    mean2 = np.mean(sample2)
-    diff = mean1 - mean2
-    return diff
-
-
-def meanlt(sample1, sample2):
-    mean1 = np.mean(sample1)
-    mean2 = np.mean(sample2)
-    diff = mean2 - mean1
-    return diff
-
-
 # Return the likelihood that sample1's mean is greater than sample2's merely by chance
 def chanceByChance(sample1, sample2, comparer=None, pairwise=True, repetitions=1000):
     if not comparer:
