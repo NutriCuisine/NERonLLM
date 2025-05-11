@@ -1,0 +1,810 @@
+{
+    "model_reports": [
+        {
+            "ner_flag": true,
+            "model_name": "bert-base-uncased",
+            "epoch_results": [
+                {
+                    "epoch": 1,
+                    "train_loss": 0.25785631733059655,
+                    "val_loss": 0.16074634393996545,
+                    "val_f1": 0.8367375935108712,
+                    "val_precision": 0.8361644284462967,
+                    "val_recall": 0.8572574178027266,
+                    "val_accuracy": 0.6534818941504178,
+                    "val_h_loss": 0.06016713091922005,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.83      0.94      0.88      1696\n       vegan       0.85      0.81      0.83      1295\n    low-carb       0.62      0.47      0.54       129\n gluten-free       0.97      0.99      0.98       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.73      0.29      0.42       362\n   low-sugar       0.86      0.98      0.92      1347\n\n   micro avg       0.84      0.86      0.85      4988\n   macro avg       0.84      0.68      0.72      4988\nweighted avg       0.84      0.86      0.84      4988\n samples avg       0.72      0.72      0.70      4988\n"
+                },
+                {
+                    "epoch": 2,
+                    "train_loss": 0.12493421281345451,
+                    "val_loss": 0.0928606627413584,
+                    "val_f1": 0.9185899832126644,
+                    "val_precision": 0.9098638041591111,
+                    "val_recall": 0.9348436246992783,
+                    "val_accuracy": 0.8,
+                    "val_h_loss": 0.032670115399920416,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.94      0.92      0.93      1696\n       vegan       0.80      0.98      0.88      1295\n    low-carb       0.93      0.71      0.80       129\n gluten-free       1.00      0.99      1.00       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.90      0.77      0.83       362\n   low-sugar       0.96      0.98      0.97      1347\n\n   micro avg       0.90      0.93      0.92      4988\n   macro avg       0.93      0.81      0.84      4988\nweighted avg       0.91      0.93      0.92      4988\n samples avg       0.77      0.78      0.77      4988\n"
+                },
+                {
+                    "epoch": 3,
+                    "train_loss": 0.0662319919511626,
+                    "val_loss": 0.05713839655667378,
+                    "val_f1": 0.9575994898856477,
+                    "val_precision": 0.9388196173799409,
+                    "val_recall": 0.9787489975942262,
+                    "val_accuracy": 0.8955431754874652,
+                    "val_h_loss": 0.016991643454038998,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      0.98      0.96      1696\n       vegan       0.91      0.97      0.94      1295\n    low-carb       0.98      0.98      0.98       129\n gluten-free       0.99      1.00      1.00       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.88      0.95      0.92       362\n   low-sugar       0.96      1.00      0.98      1347\n\n   micro avg       0.94      0.98      0.96      4988\n   macro avg       0.95      0.88      0.89      4988\nweighted avg       0.94      0.98      0.96      4988\n samples avg       0.81      0.82      0.81      4988\n"
+                },
+                {
+                    "epoch": 4,
+                    "train_loss": 0.03899400873681657,
+                    "val_loss": 0.04532624154615077,
+                    "val_f1": 0.9643522256451533,
+                    "val_precision": 0.9621256038629517,
+                    "val_recall": 0.9677225340817963,
+                    "val_accuracy": 0.9133704735376045,
+                    "val_h_loss": 0.014126541981695185,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      0.98      0.97      1696\n       vegan       0.96      0.93      0.94      1295\n    low-carb       0.99      0.95      0.97       129\n gluten-free       1.00      0.99      1.00       142\n    nut-free       1.00      0.53      0.69        17\nhigh-protein       0.88      0.99      0.93       362\n   low-sugar       0.98      0.99      0.98      1347\n\n   micro avg       0.96      0.97      0.96      4988\n   macro avg       0.97      0.91      0.93      4988\nweighted avg       0.96      0.97      0.96      4988\n samples avg       0.81      0.81      0.81      4988\n"
+                },
+                {
+                    "epoch": 5,
+                    "train_loss": 0.026725818392557804,
+                    "val_loss": 0.03886274014027138,
+                    "val_f1": 0.9730236544014513,
+                    "val_precision": 0.9576926798089855,
+                    "val_recall": 0.9889735364875701,
+                    "val_accuracy": 0.9367688022284123,
+                    "val_h_loss": 0.010863509749303621,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      0.99      0.98      1696\n       vegan       0.95      0.98      0.96      1295\n    low-carb       0.96      1.00      0.98       129\n gluten-free       1.00      0.99      1.00       142\n    nut-free       0.86      0.71      0.77        17\nhigh-protein       0.93      0.99      0.96       362\n   low-sugar       0.96      1.00      0.98      1347\n\n   micro avg       0.96      0.99      0.97      4988\n   macro avg       0.95      0.95      0.95      4988\nweighted avg       0.96      0.99      0.97      4988\n samples avg       0.82      0.83      0.83      4988\n"
+                },
+                {
+                    "epoch": 6,
+                    "train_loss": 0.02130550436385122,
+                    "val_loss": 0.0405395217965832,
+                    "val_f1": 0.9708793106805783,
+                    "val_precision": 0.9637876280057381,
+                    "val_recall": 0.9789494787489976,
+                    "val_accuracy": 0.9295264623955432,
+                    "val_h_loss": 0.011579785117389574,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      0.99      0.98      1696\n       vegan       0.97      0.96      0.96      1295\n    low-carb       0.99      0.86      0.92       129\n gluten-free       0.99      1.00      1.00       142\n    nut-free       0.83      0.59      0.69        17\nhigh-protein       0.89      0.99      0.94       362\n   low-sugar       0.97      1.00      0.98      1347\n\n   micro avg       0.96      0.98      0.97      4988\n   macro avg       0.95      0.91      0.92      4988\nweighted avg       0.96      0.98      0.97      4988\n samples avg       0.82      0.82      0.82      4988\n"
+                }
+            ],
+            "best_model_path": "C:\\Users\\kemal\\PycharmProjects\\NERonLLM/best_model_bert-base-uncased_with_ner.pt",
+            "best_val_f1": 0.9730236544014513,
+            "test_results": {
+                "test_f1": 0.9672125797313992,
+                "test_precision": 0.963880029687567,
+                "test_recall": 0.9722110350382601,
+                "test_accuracy": 0.9200557103064066,
+                "test_h_loss": 0.012813370473537604,
+                "test_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.97      0.98      0.97      1706\n       vegan       0.97      0.94      0.96      1279\n    low-carb       0.97      0.82      0.89       119\n gluten-free       0.99      0.99      0.99       152\n    nut-free       1.00      0.30      0.46        10\nhigh-protein       0.89      1.00      0.94       350\n   low-sugar       0.97      1.00      0.98      1350\n\n   micro avg       0.96      0.97      0.97      4966\n   macro avg       0.97      0.86      0.89      4966\nweighted avg       0.96      0.97      0.97      4966\n samples avg       0.81      0.82      0.81      4966\n"
+            }
+        },
+        {
+            "ner_flag": true,
+            "model_name": "FacebookAI/roberta-base",
+            "epoch_results": [
+                {
+                    "epoch": 1,
+                    "train_loss": 0.314406761004738,
+                    "val_loss": 0.22584078130716737,
+                    "val_f1": 0.7315352690707858,
+                    "val_precision": 0.7426369372199905,
+                    "val_recall": 0.7778668805132317,
+                    "val_accuracy": 0.5130919220055711,
+                    "val_h_loss": 0.09446876243533625,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.75      0.88      0.81      1696\n       vegan       0.70      0.78      0.74      1295\n    low-carb       0.54      0.05      0.10       129\n gluten-free       0.93      0.87      0.90       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.69      0.05      0.09       362\n   low-sugar       0.79      0.91      0.85      1347\n\n   micro avg       0.75      0.78      0.77      4988\n   macro avg       0.63      0.51      0.50      4988\nweighted avg       0.74      0.78      0.73      4988\n samples avg       0.64      0.66      0.63      4988\n"
+                },
+                {
+                    "epoch": 2,
+                    "train_loss": 0.2013189053072202,
+                    "val_loss": 0.15847737237578777,
+                    "val_f1": 0.8162514225570465,
+                    "val_precision": 0.838216813042404,
+                    "val_recall": 0.8484362469927826,
+                    "val_accuracy": 0.6367688022284123,
+                    "val_h_loss": 0.06366892160764027,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.84      0.93      0.88      1696\n       vegan       0.80      0.85      0.82      1295\n    low-carb       1.00      0.05      0.09       129\n gluten-free       0.95      0.89      0.92       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.89      0.25      0.39       362\n   low-sugar       0.84      0.99      0.91      1347\n\n   micro avg       0.83      0.85      0.84      4988\n   macro avg       0.76      0.56      0.57      4988\nweighted avg       0.84      0.85      0.82      4988\n samples avg       0.72      0.72      0.70      4988\n"
+                },
+                {
+                    "epoch": 3,
+                    "train_loss": 0.13899332351996826,
+                    "val_loss": 0.11455375521562014,
+                    "val_f1": 0.8751818340201027,
+                    "val_precision": 0.9189886430221532,
+                    "val_recall": 0.8508420208500401,
+                    "val_accuracy": 0.7292479108635097,
+                    "val_h_loss": 0.04524472741742937,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.94      0.85      0.89      1696\n       vegan       0.88      0.85      0.87      1295\n    low-carb       0.95      0.48      0.64       129\n gluten-free       0.92      0.96      0.94       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.98      0.49      0.65       362\n   low-sugar       0.91      0.98      0.94      1347\n\n   micro avg       0.92      0.85      0.88      4988\n   macro avg       0.94      0.70      0.77      4988\nweighted avg       0.92      0.85      0.88      4988\n samples avg       0.71      0.70      0.70      4988\n"
+                },
+                {
+                    "epoch": 4,
+                    "train_loss": 0.09788383327828366,
+                    "val_loss": 0.08539097821277739,
+                    "val_f1": 0.9274897870857649,
+                    "val_precision": 0.9044084178006522,
+                    "val_recall": 0.954691259021652,
+                    "val_accuracy": 0.8214484679665738,
+                    "val_h_loss": 0.02988460007958615,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.92      0.97      0.94      1696\n       vegan       0.86      0.94      0.90      1295\n    low-carb       0.66      0.89      0.76       129\n gluten-free       0.96      0.95      0.96       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.82      0.91      0.86       362\n   low-sugar       0.97      0.97      0.97      1347\n\n   micro avg       0.90      0.95      0.93      4988\n   macro avg       0.88      0.85      0.84      4988\nweighted avg       0.90      0.95      0.93      4988\n samples avg       0.77      0.80      0.78      4988\n"
+                },
+                {
+                    "epoch": 5,
+                    "train_loss": 0.07063410934034127,
+                    "val_loss": 0.06278638563374003,
+                    "val_f1": 0.9475805095532103,
+                    "val_precision": 0.928954347431634,
+                    "val_recall": 0.9691259021651965,
+                    "val_accuracy": 0.8727019498607242,
+                    "val_h_loss": 0.021209709510545165,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      0.97      0.96      1696\n       vegan       0.89      0.97      0.93      1295\n    low-carb       0.86      0.96      0.91       129\n gluten-free       0.97      0.95      0.96       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.85      0.95      0.90       362\n   low-sugar       0.97      0.98      0.97      1347\n\n   micro avg       0.93      0.97      0.95      4988\n   macro avg       0.93      0.87      0.87      4988\nweighted avg       0.93      0.97      0.95      4988\n samples avg       0.80      0.81      0.80      4988\n"
+                },
+                {
+                    "epoch": 6,
+                    "train_loss": 0.05498462519408297,
+                    "val_loss": 0.05126271202365862,
+                    "val_f1": 0.9611105531998618,
+                    "val_precision": 0.9532924976672131,
+                    "val_recall": 0.9705292702485966,
+                    "val_accuracy": 0.9077994428969359,
+                    "val_h_loss": 0.01532033426183844,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      0.99      0.97      1696\n       vegan       0.93      0.95      0.94      1295\n    low-carb       0.93      0.96      0.94       129\n gluten-free       0.99      0.96      0.97       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.95      0.94      0.95       362\n   low-sugar       0.97      0.99      0.98      1347\n\n   micro avg       0.95      0.97      0.96      4988\n   macro avg       0.96      0.87      0.89      4988\nweighted avg       0.95      0.97      0.96      4988\n samples avg       0.81      0.81      0.81      4988\n"
+                }
+            ],
+            "best_model_path": "C:\\Users\\kemal\\PycharmProjects\\NERonLLM/best_model_FacebookAI_roberta-base_with_ner.pt",
+            "best_val_f1": 0.9611105531998618,
+            "test_results": {
+                "test_f1": 0.9612702099527951,
+                "test_precision": 0.9502407417034964,
+                "test_recall": 0.9726137736608941,
+                "test_accuracy": 0.9108635097493036,
+                "test_h_loss": 0.015081575805809789,
+                "test_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      0.98      0.97      1706\n       vegan       0.94      0.96      0.95      1279\n    low-carb       0.93      0.97      0.95       119\n gluten-free       0.99      0.96      0.98       152\n    nut-free       0.00      0.00      0.00        10\nhigh-protein       0.93      0.95      0.94       350\n   low-sugar       0.96      0.99      0.98      1350\n\n   micro avg       0.95      0.97      0.96      4966\n   macro avg       0.82      0.83      0.82      4966\nweighted avg       0.95      0.97      0.96      4966\n samples avg       0.80      0.81      0.81      4966\n"
+            }
+        },
+        {
+            "ner_flag": true,
+            "model_name": "albert/albert-base-v2",
+            "epoch_results": [
+                {
+                    "epoch": 1,
+                    "train_loss": 0.38751194705081876,
+                    "val_loss": 0.3843648209338199,
+                    "val_f1": 0.21818660661486167,
+                    "val_precision": 0.16063153239082992,
+                    "val_recall": 0.3400160384923817,
+                    "val_accuracy": 0.14735376044568246,
+                    "val_h_loss": 0.20636689216076404,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.47      1.00      0.64      1696\n       vegan       0.00      0.00      0.00      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.00      0.00      0.00       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.00      0.00      0.00      1347\n\n   micro avg       0.47      0.34      0.40      4988\n   macro avg       0.07      0.14      0.09      4988\nweighted avg       0.16      0.34      0.22      4988\n samples avg       0.47      0.29      0.35      4988\n"
+                },
+                {
+                    "epoch": 2,
+                    "train_loss": 0.37698172118938184,
+                    "val_loss": 0.3554898899355551,
+                    "val_f1": 0.4263279654626618,
+                    "val_precision": 0.5334399126746722,
+                    "val_recall": 0.35886126704089816,
+                    "val_accuracy": 0.23175487465181058,
+                    "val_h_loss": 0.17425387982491047,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.69      0.40      0.50      1696\n       vegan       0.53      0.45      0.49      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.00      0.00      0.00       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.60      0.39      0.48      1347\n\n   micro avg       0.60      0.36      0.45      4988\n   macro avg       0.26      0.18      0.21      4988\nweighted avg       0.53      0.36      0.43      4988\n samples avg       0.34      0.31      0.30      4988\n"
+                },
+                {
+                    "epoch": 3,
+                    "train_loss": 0.34236294107997317,
+                    "val_loss": 0.3113109744205772,
+                    "val_f1": 0.5073553289521713,
+                    "val_precision": 0.7044690586819528,
+                    "val_recall": 0.4314354450681636,
+                    "val_accuracy": 0.3284122562674095,
+                    "val_h_loss": 0.14146438519697574,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.84      0.28      0.42      1696\n       vegan       0.66      0.71      0.68      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.87      0.80      0.83       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.83      0.48      0.61      1347\n\n   micro avg       0.75      0.43      0.55      4988\n   macro avg       0.46      0.32      0.36      4988\nweighted avg       0.70      0.43      0.51      4988\n samples avg       0.47      0.37      0.39      4988\n"
+                },
+                {
+                    "epoch": 4,
+                    "train_loss": 0.3064739343985104,
+                    "val_loss": 0.3072708448548625,
+                    "val_f1": 0.489461333085967,
+                    "val_precision": 0.6913292712617451,
+                    "val_recall": 0.4442662389735365,
+                    "val_accuracy": 0.3231197771587744,
+                    "val_h_loss": 0.14580183048149623,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.90      0.19      0.32      1696\n       vegan       0.63      0.66      0.65      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.93      0.89      0.91       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.72      0.67      0.70      1347\n\n   micro avg       0.71      0.44      0.55      4988\n   macro avg       0.46      0.35      0.37      4988\nweighted avg       0.69      0.44      0.49      4988\n samples avg       0.41      0.36      0.37      4988\n"
+                },
+                {
+                    "epoch": 5,
+                    "train_loss": 0.29263912685706484,
+                    "val_loss": 0.2700066549209816,
+                    "val_f1": 0.5981020916269114,
+                    "val_precision": 0.698842523345936,
+                    "val_recall": 0.5685645549318364,
+                    "val_accuracy": 0.38662952646239557,
+                    "val_h_loss": 0.12037405491444489,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.83      0.34      0.48      1696\n       vegan       0.72      0.71      0.71      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.87      0.95      0.91       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.76      0.89      0.82      1347\n\n   micro avg       0.76      0.57      0.65      4988\n   macro avg       0.45      0.41      0.42      4988\nweighted avg       0.70      0.57      0.60      4988\n samples avg       0.51      0.47      0.47      4988\n"
+                },
+                {
+                    "epoch": 6,
+                    "train_loss": 0.249354989026827,
+                    "val_loss": 0.22776606491453663,
+                    "val_f1": 0.677833137828755,
+                    "val_precision": 0.7992892374645356,
+                    "val_recall": 0.6503608660785886,
+                    "val_accuracy": 0.45264623955431754,
+                    "val_h_loss": 0.10131317150815758,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.83      0.43      0.56      1696\n       vegan       0.75      0.81      0.78      1295\n    low-carb       0.94      0.13      0.23       129\n gluten-free       0.92      0.97      0.95       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.67      0.10      0.18       362\n   low-sugar       0.82      0.95      0.88      1347\n\n   micro avg       0.80      0.65      0.72      4988\n   macro avg       0.71      0.48      0.51      4988\nweighted avg       0.80      0.65      0.68      4988\n samples avg       0.60      0.54      0.55      4988\n"
+                }
+            ],
+            "best_model_path": "C:\\Users\\kemal\\PycharmProjects\\NERonLLM/best_model_albert_albert-base-v2_with_ner.pt",
+            "best_val_f1": 0.677833137828755,
+            "test_results": {
+                "test_f1": 0.6840004452422663,
+                "test_precision": 0.7953969723144771,
+                "test_recall": 0.6566653242045912,
+                "test_accuracy": 0.467966573816156,
+                "test_h_loss": 0.10011937922801432,
+                "test_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.85      0.45      0.59      1706\n       vegan       0.75      0.81      0.78      1279\n    low-carb       0.77      0.08      0.15       119\n gluten-free       0.94      0.97      0.96       152\n    nut-free       0.00      0.00      0.00        10\nhigh-protein       0.60      0.11      0.18       350\n   low-sugar       0.81      0.94      0.87      1350\n\n   micro avg       0.80      0.66      0.72      4966\n   macro avg       0.67      0.48      0.50      4966\nweighted avg       0.80      0.66      0.68      4966\n samples avg       0.60      0.55      0.55      4966\n"
+            }
+        },
+        {
+            "ner_flag": true,
+            "model_name": "distilbert/distilbert-base-uncased",
+            "epoch_results": [
+                {
+                    "epoch": 1,
+                    "train_loss": 0.26627676349592244,
+                    "val_loss": 0.1683791053454435,
+                    "val_f1": 0.823867836357134,
+                    "val_precision": 0.8555731394680071,
+                    "val_recall": 0.8103448275862069,
+                    "val_accuracy": 0.6325905292479108,
+                    "val_h_loss": 0.06291285316354954,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.84      0.91      0.87      1696\n       vegan       0.86      0.73      0.79      1295\n    low-carb       0.73      0.46      0.56       129\n gluten-free       0.96      0.92      0.94       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.75      0.32      0.45       362\n   low-sugar       0.91      0.94      0.92      1347\n\n   micro avg       0.86      0.81      0.84      4988\n   macro avg       0.72      0.61      0.65      4988\nweighted avg       0.86      0.81      0.82      4988\n samples avg       0.70      0.68      0.68      4988\n"
+                },
+                {
+                    "epoch": 2,
+                    "train_loss": 0.13705902702398348,
+                    "val_loss": 0.09590731082455087,
+                    "val_f1": 0.915650665842056,
+                    "val_precision": 0.8938483355068576,
+                    "val_recall": 0.9388532477947072,
+                    "val_accuracy": 0.8025069637883009,
+                    "val_h_loss": 0.033426183844011144,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.91      0.97      0.94      1696\n       vegan       0.88      0.93      0.90      1295\n    low-carb       0.72      0.71      0.71       129\n gluten-free       0.99      0.97      0.98       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.81      0.79      0.80       362\n   low-sugar       0.93      0.98      0.96      1347\n\n   micro avg       0.90      0.94      0.92      4988\n   macro avg       0.75      0.76      0.76      4988\nweighted avg       0.89      0.94      0.92      4988\n samples avg       0.77      0.79      0.77      4988\n"
+                },
+                {
+                    "epoch": 3,
+                    "train_loss": 0.07671789981784173,
+                    "val_loss": 0.05560313827277292,
+                    "val_f1": 0.9561768657708791,
+                    "val_precision": 0.9456466042237913,
+                    "val_recall": 0.9691259021651965,
+                    "val_accuracy": 0.8916434540389973,
+                    "val_h_loss": 0.01738957421408675,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      0.98      0.97      1696\n       vegan       0.91      0.96      0.94      1295\n    low-carb       0.87      0.91      0.89       129\n gluten-free       1.00      0.98      0.99       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.98      0.89      0.93       362\n   low-sugar       0.97      0.99      0.98      1347\n\n   micro avg       0.94      0.97      0.96      4988\n   macro avg       0.95      0.86      0.88      4988\nweighted avg       0.95      0.97      0.96      4988\n samples avg       0.81      0.81      0.81      4988\n"
+                },
+                {
+                    "epoch": 4,
+                    "train_loss": 0.04621390027257346,
+                    "val_loss": 0.04308481665404891,
+                    "val_f1": 0.9674158771376264,
+                    "val_precision": 0.9669518003969096,
+                    "val_recall": 0.9693263833199679,
+                    "val_accuracy": 0.9220055710306406,
+                    "val_h_loss": 0.012693991245523279,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.97      0.97      0.97      1696\n       vegan       0.96      0.95      0.95      1295\n    low-carb       0.92      0.99      0.96       129\n gluten-free       1.00      0.99      0.99       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.94      0.96      0.95       362\n   low-sugar       0.98      0.99      0.99      1347\n\n   micro avg       0.97      0.97      0.97      4988\n   macro avg       0.97      0.88      0.89      4988\nweighted avg       0.97      0.97      0.97      4988\n samples avg       0.81      0.81      0.81      4988\n"
+                },
+                {
+                    "epoch": 5,
+                    "train_loss": 0.030975598031279132,
+                    "val_loss": 0.04070263122076704,
+                    "val_f1": 0.9714822080627026,
+                    "val_precision": 0.9734138397327302,
+                    "val_recall": 0.9709302325581395,
+                    "val_accuracy": 0.9323119777158775,
+                    "val_h_loss": 0.011102268205332272,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.98      0.96      0.97      1696\n       vegan       0.97      0.95      0.96      1295\n    low-carb       0.93      1.00      0.96       129\n gluten-free       1.00      0.98      0.99       142\n    nut-free       1.00      0.35      0.52        17\nhigh-protein       0.93      0.99      0.96       362\n   low-sugar       0.98      1.00      0.99      1347\n\n   micro avg       0.97      0.97      0.97      4988\n   macro avg       0.97      0.89      0.91      4988\nweighted avg       0.97      0.97      0.97      4988\n samples avg       0.81      0.81      0.81      4988\n"
+                },
+                {
+                    "epoch": 6,
+                    "train_loss": 0.022026983399963524,
+                    "val_loss": 0.03964997338375309,
+                    "val_f1": 0.9734703773671186,
+                    "val_precision": 0.9652231045681606,
+                    "val_recall": 0.9821571772253408,
+                    "val_accuracy": 0.935933147632312,
+                    "val_h_loss": 0.010584958217270195,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      0.99      0.97      1696\n       vegan       0.96      0.96      0.96      1295\n    low-carb       0.90      0.99      0.94       129\n gluten-free       1.00      0.97      0.99       142\n    nut-free       0.71      0.59      0.65        17\nhigh-protein       0.96      0.99      0.97       362\n   low-sugar       0.99      1.00      0.99      1347\n\n   micro avg       0.97      0.98      0.97      4988\n   macro avg       0.93      0.93      0.92      4988\nweighted avg       0.97      0.98      0.97      4988\n samples avg       0.82      0.83      0.82      4988\n"
+                }
+            ],
+            "best_model_path": "C:\\Users\\kemal\\PycharmProjects\\NERonLLM/best_model_distilbert_distilbert-base-uncased_with_ner.pt",
+            "best_val_f1": 0.9734703773671186,
+            "test_results": {
+                "test_f1": 0.9719851105240929,
+                "test_precision": 0.9624969351641687,
+                "test_recall": 0.981876761981474,
+                "test_accuracy": 0.933983286908078,
+                "test_h_loss": 0.011142061281337047,
+                "test_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      0.98      0.97      1706\n       vegan       0.96      0.96      0.96      1279\n    low-carb       0.95      0.98      0.97       119\n gluten-free       0.99      0.97      0.98       152\n    nut-free       0.86      0.60      0.71        10\nhigh-protein       0.96      1.00      0.98       350\n   low-sugar       0.97      1.00      0.99      1350\n\n   micro avg       0.96      0.98      0.97      4966\n   macro avg       0.95      0.93      0.94      4966\nweighted avg       0.96      0.98      0.97      4966\n samples avg       0.82      0.82      0.82      4966\n"
+            }
+        },
+        {
+            "ner_flag": false,
+            "model_name": "bert-base-uncased",
+            "epoch_results": [
+                {
+                    "epoch": 1,
+                    "train_loss": 0.2673174352122697,
+                    "val_loss": 0.17349768871387553,
+                    "val_f1": 0.8156809906365583,
+                    "val_precision": 0.8181893689071837,
+                    "val_recall": 0.861467522052927,
+                    "val_accuracy": 0.6186629526462396,
+                    "val_h_loss": 0.06705133306804616,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.84      0.93      0.88      1696\n       vegan       0.74      0.89      0.81      1295\n    low-carb       0.63      0.51      0.56       129\n gluten-free       0.98      0.99      0.99       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.90      0.15      0.25       362\n   low-sugar       0.84      0.97      0.90      1347\n\n   micro avg       0.81      0.86      0.84      4988\n   macro avg       0.85      0.68      0.69      4988\nweighted avg       0.82      0.86      0.82      4988\n samples avg       0.71      0.73      0.70      4988\n"
+                },
+                {
+                    "epoch": 2,
+                    "train_loss": 0.12881258943001628,
+                    "val_loss": 0.09083163672705535,
+                    "val_f1": 0.9129359623379981,
+                    "val_precision": 0.9293750632658073,
+                    "val_recall": 0.9023656776263032,
+                    "val_accuracy": 0.7966573816155988,
+                    "val_h_loss": 0.03294866693195384,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.92      0.96      0.94      1696\n       vegan       0.94      0.81      0.87      1295\n    low-carb       0.86      0.68      0.76       129\n gluten-free       1.00      0.99      0.99       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.90      0.75      0.82       362\n   low-sugar       0.94      0.98      0.96      1347\n\n   micro avg       0.93      0.90      0.92      4988\n   macro avg       0.94      0.78      0.83      4988\nweighted avg       0.93      0.90      0.91      4988\n samples avg       0.77      0.75      0.75      4988\n"
+                },
+                {
+                    "epoch": 3,
+                    "train_loss": 0.06663116006982987,
+                    "val_loss": 0.05503005946868147,
+                    "val_f1": 0.9555497208912493,
+                    "val_precision": 0.9414929248673929,
+                    "val_recall": 0.9717321571772254,
+                    "val_accuracy": 0.8877437325905293,
+                    "val_h_loss": 0.017906884202148827,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      0.98      0.96      1696\n       vegan       0.92      0.96      0.94      1295\n    low-carb       0.80      0.96      0.87       129\n gluten-free       1.00      0.99      1.00       142\n    nut-free       1.00      0.35      0.52        17\nhigh-protein       0.87      0.95      0.91       362\n   low-sugar       0.98      0.98      0.98      1347\n\n   micro avg       0.94      0.97      0.96      4988\n   macro avg       0.93      0.88      0.88      4988\nweighted avg       0.94      0.97      0.96      4988\n samples avg       0.81      0.82      0.81      4988\n"
+                },
+                {
+                    "epoch": 4,
+                    "train_loss": 0.03955920770732773,
+                    "val_loss": 0.04049292695190019,
+                    "val_f1": 0.9696983978194337,
+                    "val_precision": 0.9645043503255485,
+                    "val_recall": 0.97514033680834,
+                    "val_accuracy": 0.9261838440111421,
+                    "val_h_loss": 0.012097095105451651,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.97      0.98      0.97      1696\n       vegan       0.96      0.96      0.96      1295\n    low-carb       0.90      0.99      0.94       129\n gluten-free       1.00      0.99      1.00       142\n    nut-free       0.80      0.71      0.75        17\nhigh-protein       0.93      0.97      0.95       362\n   low-sugar       0.98      0.99      0.99      1347\n\n   micro avg       0.96      0.98      0.97      4988\n   macro avg       0.93      0.94      0.94      4988\nweighted avg       0.96      0.98      0.97      4988\n samples avg       0.82      0.82      0.82      4988\n"
+                },
+                {
+                    "epoch": 5,
+                    "train_loss": 0.027200421640082816,
+                    "val_loss": 0.04366965466028573,
+                    "val_f1": 0.9698370194157082,
+                    "val_precision": 0.9593804875731872,
+                    "val_recall": 0.9809542902967121,
+                    "val_accuracy": 0.9245125348189415,
+                    "val_h_loss": 0.012097095105451651,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      1.00      0.97      1696\n       vegan       0.96      0.94      0.95      1295\n    low-carb       0.93      0.98      0.95       129\n gluten-free       1.00      0.99      1.00       142\n    nut-free       0.70      0.82      0.76        17\nhigh-protein       0.93      0.99      0.96       362\n   low-sugar       0.97      1.00      0.99      1347\n\n   micro avg       0.96      0.98      0.97      4988\n   macro avg       0.92      0.96      0.94      4988\nweighted avg       0.96      0.98      0.97      4988\n samples avg       0.82      0.83      0.82      4988\n"
+                },
+                {
+                    "epoch": 6,
+                    "train_loss": 0.021109059621684908,
+                    "val_loss": 0.0333869318363209,
+                    "val_f1": 0.9771385125307968,
+                    "val_precision": 0.9705032760486791,
+                    "val_recall": 0.9839615076182838,
+                    "val_accuracy": 0.9442896935933147,
+                    "val_h_loss": 0.00915240748109829,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.97      0.98      0.98      1696\n       vegan       0.97      0.97      0.97      1295\n    low-carb       0.92      1.00      0.96       129\n gluten-free       1.00      0.99      1.00       142\n    nut-free       0.78      0.82      0.80        17\nhigh-protein       0.95      0.98      0.96       362\n   low-sugar       0.98      1.00      0.99      1347\n\n   micro avg       0.97      0.98      0.98      4988\n   macro avg       0.94      0.96      0.95      4988\nweighted avg       0.97      0.98      0.98      4988\n samples avg       0.82      0.83      0.82      4988\n"
+                }
+            ],
+            "best_model_path": "C:\\Users\\kemal\\PycharmProjects\\NERonLLM/best_model_bert-base-uncased_without_ner.pt",
+            "best_val_f1": 0.9771385125307968,
+            "test_results": {
+                "test_f1": 0.9730919463636433,
+                "test_precision": 0.9666662886354425,
+                "test_recall": 0.9798630688683044,
+                "test_accuracy": 0.935933147632312,
+                "test_h_loss": 0.010744130521289296,
+                "test_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.98      0.97      0.97      1706\n       vegan       0.95      0.97      0.96      1279\n    low-carb       0.89      0.99      0.94       119\n gluten-free       0.99      0.98      0.99       152\n    nut-free       0.73      0.80      0.76        10\nhigh-protein       0.93      0.99      0.96       350\n   low-sugar       0.98      1.00      0.99      1350\n\n   micro avg       0.97      0.98      0.97      4966\n   macro avg       0.92      0.96      0.94      4966\nweighted avg       0.97      0.98      0.97      4966\n samples avg       0.82      0.82      0.82      4966\n"
+            }
+        },
+        {
+            "ner_flag": false,
+            "model_name": "FacebookAI/roberta-base",
+            "epoch_results": [
+                {
+                    "epoch": 1,
+                    "train_loss": 0.30025818548320926,
+                    "val_loss": 0.20792624553487135,
+                    "val_f1": 0.7364810126314705,
+                    "val_precision": 0.7743464551857226,
+                    "val_recall": 0.7608259823576584,
+                    "val_accuracy": 0.5217270194986072,
+                    "val_h_loss": 0.08826104257859133,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.81      0.81      0.81      1696\n       vegan       0.73      0.76      0.75      1295\n    low-carb       0.50      0.01      0.02       129\n gluten-free       0.96      0.96      0.96       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.74      0.04      0.07       362\n   low-sugar       0.79      0.95      0.86      1347\n\n   micro avg       0.79      0.76      0.77      4988\n   macro avg       0.65      0.50      0.50      4988\nweighted avg       0.77      0.76      0.74      4988\n samples avg       0.66      0.65      0.64      4988\n"
+                },
+                {
+                    "epoch": 2,
+                    "train_loss": 0.18505737447707338,
+                    "val_loss": 0.14280963426078347,
+                    "val_f1": 0.863079787890216,
+                    "val_precision": 0.8500800851797471,
+                    "val_recall": 0.8803127506014434,
+                    "val_accuracy": 0.6707520891364902,
+                    "val_h_loss": 0.055471547950656584,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.87      0.93      0.90      1696\n       vegan       0.87      0.80      0.83      1295\n    low-carb       0.67      0.61      0.64       129\n gluten-free       1.00      0.97      0.99       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.54      0.73      0.62       362\n   low-sugar       0.90      0.96      0.93      1347\n\n   micro avg       0.85      0.88      0.86      4988\n   macro avg       0.69      0.72      0.70      4988\nweighted avg       0.85      0.88      0.86      4988\n samples avg       0.73      0.74      0.72      4988\n"
+                },
+                {
+                    "epoch": 3,
+                    "train_loss": 0.1255687976197305,
+                    "val_loss": 0.10157431383930429,
+                    "val_f1": 0.9090165028694511,
+                    "val_precision": 0.8764285883546853,
+                    "val_recall": 0.9466720128307939,
+                    "val_accuracy": 0.7782729805013927,
+                    "val_h_loss": 0.03656983684838838,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.90      0.97      0.93      1696\n       vegan       0.83      0.95      0.89      1295\n    low-carb       0.90      0.64      0.75       129\n gluten-free       1.00      0.99      0.99       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.82      0.84      0.83       362\n   low-sugar       0.90      0.98      0.94      1347\n\n   micro avg       0.88      0.95      0.91      4988\n   macro avg       0.76      0.77      0.76      4988\nweighted avg       0.88      0.95      0.91      4988\n samples avg       0.77      0.80      0.77      4988\n"
+                },
+                {
+                    "epoch": 4,
+                    "train_loss": 0.08679331733766008,
+                    "val_loss": 0.07351876146995975,
+                    "val_f1": 0.9386917830638447,
+                    "val_precision": 0.9335552828722107,
+                    "val_recall": 0.9476744186046512,
+                    "val_accuracy": 0.8506963788300835,
+                    "val_h_loss": 0.02479108635097493,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      0.94      0.95      1696\n       vegan       0.91      0.94      0.93      1295\n    low-carb       0.62      0.96      0.75       129\n gluten-free       0.98      0.96      0.97       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.95      0.86      0.90       362\n   low-sugar       0.95      0.99      0.97      1347\n\n   micro avg       0.93      0.95      0.94      4988\n   macro avg       0.91      0.85      0.85      4988\nweighted avg       0.93      0.95      0.94      4988\n samples avg       0.79      0.79      0.78      4988\n"
+                },
+                {
+                    "epoch": 5,
+                    "train_loss": 0.06321376554290795,
+                    "val_loss": 0.05822180286112069,
+                    "val_f1": 0.9542651571815133,
+                    "val_precision": 0.943514425910223,
+                    "val_recall": 0.9669206094627105,
+                    "val_accuracy": 0.8852367688022285,
+                    "val_h_loss": 0.018583366494230005,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.94      0.98      0.96      1696\n       vegan       0.94      0.94      0.94      1295\n    low-carb       0.70      1.00      0.82       129\n gluten-free       0.98      0.96      0.97       142\n    nut-free       0.71      0.59      0.65        17\nhigh-protein       0.95      0.91      0.93       362\n   low-sugar       0.97      0.99      0.98      1347\n\n   micro avg       0.94      0.97      0.95      4988\n   macro avg       0.88      0.91      0.89      4988\nweighted avg       0.94      0.97      0.95      4988\n samples avg       0.80      0.81      0.80      4988\n"
+                },
+                {
+                    "epoch": 6,
+                    "train_loss": 0.04766733774685398,
+                    "val_loss": 0.050193453028710984,
+                    "val_f1": 0.9610242625401341,
+                    "val_precision": 0.956778193630509,
+                    "val_recall": 0.9669206094627105,
+                    "val_accuracy": 0.9044568245125348,
+                    "val_h_loss": 0.015877437325905294,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      0.98      0.97      1696\n       vegan       0.96      0.94      0.95      1295\n    low-carb       0.69      1.00      0.81       129\n gluten-free       1.00      0.99      0.99       142\n    nut-free       0.79      0.65      0.71        17\nhigh-protein       0.94      0.96      0.95       362\n   low-sugar       0.98      0.98      0.98      1347\n\n   micro avg       0.95      0.97      0.96      4988\n   macro avg       0.90      0.93      0.91      4988\nweighted avg       0.96      0.97      0.96      4988\n samples avg       0.80      0.81      0.80      4988\n"
+                }
+            ],
+            "best_model_path": "C:\\Users\\kemal\\PycharmProjects\\NERonLLM/best_model_FacebookAI_roberta-base_without_ner.pt",
+            "best_val_f1": 0.9610242625401341,
+            "test_results": {
+                "test_f1": 0.9573662560292013,
+                "test_precision": 0.9527279713429845,
+                "test_recall": 0.963954893274265,
+                "test_accuracy": 0.8947075208913648,
+                "test_h_loss": 0.01738957421408675,
+                "test_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      0.97      0.97      1706\n       vegan       0.95      0.93      0.94      1279\n    low-carb       0.64      0.98      0.77       119\n gluten-free       0.98      1.00      0.99       152\n    nut-free       0.86      0.60      0.71        10\nhigh-protein       0.94      0.97      0.96       350\n   low-sugar       0.97      0.98      0.98      1350\n\n   micro avg       0.95      0.96      0.96      4966\n   macro avg       0.90      0.92      0.90      4966\nweighted avg       0.95      0.96      0.96      4966\n samples avg       0.80      0.81      0.80      4966\n"
+            }
+        },
+        {
+            "ner_flag": false,
+            "model_name": "albert/albert-base-v2",
+            "epoch_results": [
+                {
+                    "epoch": 1,
+                    "train_loss": 0.38685405880582824,
+                    "val_loss": 0.3835497002028145,
+                    "val_f1": 0.0,
+                    "val_precision": 0.0,
+                    "val_recall": 0.0,
+                    "val_accuracy": 0.15181058495821728,
+                    "val_h_loss": 0.19848786311181854,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.00      0.00      0.00      1696\n       vegan       0.00      0.00      0.00      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.00      0.00      0.00       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.00      0.00      0.00      1347\n\n   micro avg       0.00      0.00      0.00      4988\n   macro avg       0.00      0.00      0.00      4988\nweighted avg       0.00      0.00      0.00      4988\n samples avg       0.00      0.00      0.00      4988\n"
+                },
+                {
+                    "epoch": 2,
+                    "train_loss": 0.3859932950654253,
+                    "val_loss": 0.384086686346207,
+                    "val_f1": 0.0015491725595975796,
+                    "val_precision": 0.003408179631114675,
+                    "val_recall": 0.0010024057738572574,
+                    "val_accuracy": 0.1532033426183844,
+                    "val_h_loss": 0.19828889773179467,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.00      0.00      0.00      1696\n       vegan       0.00      0.00      0.00      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.00      0.00      0.00       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.00      0.00      0.00      1347\n\n   micro avg       1.00      0.00      0.00      4988\n   macro avg       0.14      0.04      0.06      4988\nweighted avg       0.00      0.00      0.00      4988\n samples avg       0.00      0.00      0.00      4988\n"
+                },
+                {
+                    "epoch": 3,
+                    "train_loss": 0.38532469399565156,
+                    "val_loss": 0.38312790096469873,
+                    "val_f1": 0.0015491725595975796,
+                    "val_precision": 0.003408179631114675,
+                    "val_recall": 0.0010024057738572574,
+                    "val_accuracy": 0.1532033426183844,
+                    "val_h_loss": 0.19828889773179467,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.00      0.00      0.00      1696\n       vegan       0.00      0.00      0.00      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.00      0.00      0.00       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.00      0.00      0.00      1347\n\n   micro avg       1.00      0.00      0.00      4988\n   macro avg       0.14      0.04      0.06      4988\nweighted avg       0.00      0.00      0.00      4988\n samples avg       0.00      0.00      0.00      4988\n"
+                },
+                {
+                    "epoch": 4,
+                    "train_loss": 0.38537389323214977,
+                    "val_loss": 0.3826793324044659,
+                    "val_f1": 0.21994235615478006,
+                    "val_precision": 0.16426374484257336,
+                    "val_recall": 0.34101844426623895,
+                    "val_accuracy": 0.14874651810584957,
+                    "val_h_loss": 0.20596896140071627,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.47      1.00      0.64      1696\n       vegan       0.00      0.00      0.00      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.00      0.00      0.00       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.00      0.00      0.00      1347\n\n   micro avg       0.47      0.34      0.40      4988\n   macro avg       0.21      0.18      0.16      4988\nweighted avg       0.16      0.34      0.22      4988\n samples avg       0.47      0.30      0.35      4988\n"
+                },
+                {
+                    "epoch": 5,
+                    "train_loss": 0.3852803592197419,
+                    "val_loss": 0.3834381256841604,
+                    "val_f1": 0.0015491725595975796,
+                    "val_precision": 0.003408179631114675,
+                    "val_recall": 0.0010024057738572574,
+                    "val_accuracy": 0.1532033426183844,
+                    "val_h_loss": 0.19828889773179467,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.00      0.00      0.00      1696\n       vegan       0.00      0.00      0.00      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.00      0.00      0.00       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.00      0.00      0.00      1347\n\n   micro avg       1.00      0.00      0.00      4988\n   macro avg       0.14      0.04      0.06      4988\nweighted avg       0.00      0.00      0.00      4988\n samples avg       0.00      0.00      0.00      4988\n"
+                },
+                {
+                    "epoch": 6,
+                    "train_loss": 0.38541956889196705,
+                    "val_loss": 0.3827603410240802,
+                    "val_f1": 0.0015491725595975796,
+                    "val_precision": 0.003408179631114675,
+                    "val_recall": 0.0010024057738572574,
+                    "val_accuracy": 0.1532033426183844,
+                    "val_h_loss": 0.19828889773179467,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.00      0.00      0.00      1696\n       vegan       0.00      0.00      0.00      1295\n    low-carb       0.00      0.00      0.00       129\n gluten-free       0.00      0.00      0.00       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.00      0.00      0.00       362\n   low-sugar       0.00      0.00      0.00      1347\n\n   micro avg       1.00      0.00      0.00      4988\n   macro avg       0.14      0.04      0.06      4988\nweighted avg       0.00      0.00      0.00      4988\n samples avg       0.00      0.00      0.00      4988\n"
+                }
+            ],
+            "best_model_path": "C:\\Users\\kemal\\PycharmProjects\\NERonLLM/best_model_albert_albert-base-v2_without_ner.pt",
+            "best_val_f1": 0.21994235615478006,
+            "test_results": {
+                "test_f1": 0.0,
+                "test_precision": 0.0,
+                "test_recall": 0.0,
+                "test_accuracy": 0.15348189415041782,
+                "test_h_loss": 0.1976124154397135,
+                "test_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.00      0.00      0.00      1706\n       vegan       0.00      0.00      0.00      1279\n    low-carb       0.00      0.00      0.00       119\n gluten-free       0.00      0.00      0.00       152\n    nut-free       0.00      0.00      0.00        10\nhigh-protein       0.00      0.00      0.00       350\n   low-sugar       0.00      0.00      0.00      1350\n\n   micro avg       0.00      0.00      0.00      4966\n   macro avg       0.00      0.00      0.00      4966\nweighted avg       0.00      0.00      0.00      4966\n samples avg       0.00      0.00      0.00      4966\n"
+            }
+        },
+        {
+            "ner_flag": false,
+            "model_name": "distilbert/distilbert-base-uncased",
+            "epoch_results": [
+                {
+                    "epoch": 1,
+                    "train_loss": 0.2729871749856581,
+                    "val_loss": 0.17829686903575215,
+                    "val_f1": 0.8152121309957047,
+                    "val_precision": 0.8054184385610137,
+                    "val_recall": 0.8360064153969526,
+                    "val_accuracy": 0.6086350974930362,
+                    "val_h_loss": 0.06951850378034222,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.80      0.95      0.87      1696\n       vegan       0.82      0.81      0.81      1295\n    low-carb       0.44      0.40      0.42       129\n gluten-free       0.94      0.94      0.94       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.56      0.28      0.38       362\n   low-sugar       0.89      0.91      0.90      1347\n\n   micro avg       0.82      0.84      0.83      4988\n   macro avg       0.64      0.61      0.62      4988\nweighted avg       0.81      0.84      0.82      4988\n samples avg       0.71      0.71      0.69      4988\n"
+                },
+                {
+                    "epoch": 2,
+                    "train_loss": 0.13457178433693467,
+                    "val_loss": 0.08927519912344045,
+                    "val_f1": 0.9255019944282268,
+                    "val_precision": 0.9144788200654931,
+                    "val_recall": 0.9374498797113071,
+                    "val_accuracy": 0.8214484679665738,
+                    "val_h_loss": 0.029088738559490648,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.94      0.96      0.95      1696\n       vegan       0.89      0.93      0.91      1295\n    low-carb       0.75      0.78      0.77       129\n gluten-free       1.00      0.96      0.98       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.88      0.80      0.83       362\n   low-sugar       0.93      0.98      0.96      1347\n\n   micro avg       0.92      0.94      0.93      4988\n   macro avg       0.77      0.77      0.77      4988\nweighted avg       0.91      0.94      0.93      4988\n samples avg       0.78      0.78      0.77      4988\n"
+                },
+                {
+                    "epoch": 3,
+                    "train_loss": 0.07206000338411697,
+                    "val_loss": 0.06312197670423507,
+                    "val_f1": 0.9470419321436389,
+                    "val_precision": 0.9297818165237469,
+                    "val_recall": 0.9661186848436247,
+                    "val_accuracy": 0.875766016713092,
+                    "val_h_loss": 0.020652606446478313,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.91      0.99      0.95      1696\n       vegan       0.93      0.94      0.93      1295\n    low-carb       0.91      0.84      0.88       129\n gluten-free       0.99      0.96      0.98       142\n    nut-free       0.00      0.00      0.00        17\nhigh-protein       0.97      0.90      0.93       362\n   low-sugar       0.95      1.00      0.98      1347\n\n   micro avg       0.93      0.97      0.95      4988\n   macro avg       0.81      0.81      0.81      4988\nweighted avg       0.93      0.97      0.95      4988\n samples avg       0.80      0.81      0.80      4988\n"
+                },
+                {
+                    "epoch": 4,
+                    "train_loss": 0.043026992917188055,
+                    "val_loss": 0.0499183275757092,
+                    "val_f1": 0.9625869621972626,
+                    "val_precision": 0.9509195267786172,
+                    "val_recall": 0.9761427425821972,
+                    "val_accuracy": 0.9133704735376045,
+                    "val_h_loss": 0.014842817349781138,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.95      0.98      0.97      1696\n       vegan       0.93      0.97      0.95      1295\n    low-carb       0.88      0.99      0.93       129\n gluten-free       1.00      0.97      0.99       142\n    nut-free       1.00      0.29      0.45        17\nhigh-protein       0.93      0.97      0.95       362\n   low-sugar       0.97      0.99      0.98      1347\n\n   micro avg       0.95      0.98      0.96      4988\n   macro avg       0.95      0.88      0.89      4988\nweighted avg       0.95      0.98      0.96      4988\n samples avg       0.82      0.82      0.82      4988\n"
+                },
+                {
+                    "epoch": 5,
+                    "train_loss": 0.03095028683010163,
+                    "val_loss": 0.04191429506497819,
+                    "val_f1": 0.9712061082152993,
+                    "val_precision": 0.9595357158288225,
+                    "val_recall": 0.9841619887730554,
+                    "val_accuracy": 0.9314763231197771,
+                    "val_h_loss": 0.011420612813370474,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      0.99      0.97      1696\n       vegan       0.95      0.97      0.96      1295\n    low-carb       0.94      1.00      0.97       129\n gluten-free       1.00      0.99      0.99       142\n    nut-free       1.00      0.41      0.58        17\nhigh-protein       0.96      0.96      0.96       362\n   low-sugar       0.97      0.99      0.98      1347\n\n   micro avg       0.96      0.98      0.97      4988\n   macro avg       0.97      0.90      0.92      4988\nweighted avg       0.96      0.98      0.97      4988\n samples avg       0.82      0.83      0.82      4988\n"
+                },
+                {
+                    "epoch": 6,
+                    "train_loss": 0.02143459572307672,
+                    "val_loss": 0.04252955476913647,
+                    "val_f1": 0.9747199264315203,
+                    "val_precision": 0.9634982333695475,
+                    "val_recall": 0.9869687249398557,
+                    "val_accuracy": 0.9406685236768803,
+                    "val_h_loss": 0.010107441305212893,
+                    "val_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.96      1.00      0.98      1696\n       vegan       0.94      0.98      0.96      1295\n    low-carb       0.89      1.00      0.94       129\n gluten-free       0.99      0.98      0.99       142\n    nut-free       1.00      0.53      0.69        17\nhigh-protein       0.96      0.98      0.97       362\n   low-sugar       0.99      0.99      0.99      1347\n\n   micro avg       0.96      0.99      0.97      4988\n   macro avg       0.96      0.92      0.93      4988\nweighted avg       0.96      0.99      0.97      4988\n samples avg       0.82      0.83      0.83      4988\n"
+                }
+            ],
+            "best_model_path": "C:\\Users\\kemal\\PycharmProjects\\NERonLLM/best_model_distilbert_distilbert-base-uncased_without_ner.pt",
+            "best_val_f1": 0.9747199264315203,
+            "test_results": {
+                "test_f1": 0.9747986962379717,
+                "test_precision": 0.9670840519720537,
+                "test_recall": 0.9838904550946436,
+                "test_accuracy": 0.9423398328690807,
+                "test_h_loss": 0.009868682849184242,
+                "test_classification_report": "              precision    recall  f1-score   support\n\n     healthy       0.97      0.99      0.98      1706\n       vegan       0.95      0.97      0.96      1279\n    low-carb       0.89      0.99      0.94       119\n gluten-free       0.99      0.99      0.99       152\n    nut-free       1.00      0.20      0.33        10\nhigh-protein       0.96      0.99      0.98       350\n   low-sugar       0.99      0.99      0.99      1350\n\n   micro avg       0.97      0.98      0.98      4966\n   macro avg       0.96      0.87      0.88      4966\nweighted avg       0.97      0.98      0.97      4966\n samples avg       0.82      0.83      0.82      4966\n"
+            }
+        }
+    ],
+    "statistical_comparison": {
+        "bert-base-uncased": {
+            "f1_score": {
+                "p_value": 0.4975024975024975,
+                "is_significant": false,
+                "with_ner": 0.9672125797313992,
+                "without_ner": 0.9730919463636433,
+                "difference": -0.005879366632244087
+            },
+            "precision": {
+                "p_value": 0.5014985014985015,
+                "is_significant": false,
+                "with_ner": 0.963880029687567,
+                "without_ner": 0.9666662886354425,
+                "difference": -0.0027862589478754307
+            },
+            "recall": {
+                "p_value": 0.4825174825174825,
+                "is_significant": false,
+                "with_ner": 0.9722110350382601,
+                "without_ner": 0.9798630688683044,
+                "difference": -0.007652033830044314
+            },
+            "accuracy": {
+                "p_value": 0.5004995004995005,
+                "is_significant": false,
+                "with_ner": 0.9200557103064066,
+                "without_ner": 0.935933147632312,
+                "difference": -0.015877437325905297
+            },
+            "hamming_loss": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.012813370473537604,
+                "without_ner": 0.010744130521289296,
+                "difference": 0.0020692399522483085
+            }
+        },
+        "FacebookAI/roberta-base": {
+            "f1_score": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.9612702099527951,
+                "without_ner": 0.9573662560292013,
+                "difference": 0.0039039539235937726
+            },
+            "precision": {
+                "p_value": 0.5244755244755245,
+                "is_significant": false,
+                "with_ner": 0.9502407417034964,
+                "without_ner": 0.9527279713429845,
+                "difference": -0.002487229639488109
+            },
+            "recall": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.9726137736608941,
+                "without_ner": 0.963954893274265,
+                "difference": 0.008658880386629098
+            },
+            "accuracy": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.9108635097493036,
+                "without_ner": 0.8947075208913648,
+                "difference": 0.016155988857938786
+            },
+            "hamming_loss": {
+                "p_value": 0.4755244755244755,
+                "is_significant": false,
+                "with_ner": 0.015081575805809789,
+                "without_ner": 0.01738957421408675,
+                "difference": -0.002307998408276961
+            }
+        },
+        "albert/albert-base-v2": {
+            "f1_score": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.6840004452422663,
+                "without_ner": 0.0,
+                "difference": 0.6840004452422663
+            },
+            "precision": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.7953969723144771,
+                "without_ner": 0.0,
+                "difference": 0.7953969723144771
+            },
+            "recall": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.6566653242045912,
+                "without_ner": 0.0,
+                "difference": 0.6566653242045912
+            },
+            "accuracy": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.467966573816156,
+                "without_ner": 0.15348189415041782,
+                "difference": 0.3144846796657381
+            },
+            "hamming_loss": {
+                "p_value": 0.5034965034965035,
+                "is_significant": false,
+                "with_ner": 0.10011937922801432,
+                "without_ner": 0.1976124154397135,
+                "difference": -0.09749303621169918
+            }
+        },
+        "distilbert/distilbert-base-uncased": {
+            "f1_score": {
+                "p_value": 0.5264735264735265,
+                "is_significant": false,
+                "with_ner": 0.9719851105240929,
+                "without_ner": 0.9747986962379717,
+                "difference": -0.0028135857138787967
+            },
+            "precision": {
+                "p_value": 0.4905094905094905,
+                "is_significant": false,
+                "with_ner": 0.9624969351641687,
+                "without_ner": 0.9670840519720537,
+                "difference": -0.004587116807885039
+            },
+            "recall": {
+                "p_value": 0.4855144855144855,
+                "is_significant": false,
+                "with_ner": 0.981876761981474,
+                "without_ner": 0.9838904550946436,
+                "difference": -0.002013693113169568
+            },
+            "accuracy": {
+                "p_value": 0.4865134865134865,
+                "is_significant": false,
+                "with_ner": 0.933983286908078,
+                "without_ner": 0.9423398328690807,
+                "difference": -0.00835654596100277
+            },
+            "hamming_loss": {
+                "p_value": 0.000999000999000999,
+                "is_significant": true,
+                "with_ner": 0.011142061281337047,
+                "without_ner": 0.009868682849184242,
+                "difference": 0.0012733784321528052
+            }
+        }
+    }
+}
