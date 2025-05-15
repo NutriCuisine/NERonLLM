@@ -1,85 +1,215 @@
 import pandas as pd
 import torch
-from sklearn.model_selection import train_test_split
-from simpletransformers.ner import NERModel, NERArgs
+from sklearn.model_selection import KFold
+from sklearn.metrics import classification_report
+from transformers import (
+    AutoTokenizer,
+    AutoModelForTokenClassification,
+    TrainingArguments,
+    Trainer,
+    DataCollatorForTokenClassification
+)
+from datasets import Dataset
 import matplotlib.pyplot as plt
+import numpy as np
+from collections import defaultdict
+import json
 
+# Force CPU usage
+device = torch.device("cpu")
+torch.set_default_device(device)
 
+# Load and preprocess data
+df = pd.read_csv("/Users/kcb/PycharmProjects/NERonLLM/ner/helper/taste_iob.csv")
 
-df = pd.read_csv("helper/taste_iob.csv")
+# Filter out unwanted labels
+df = df[~df["labels"].isin([
+    "B-DIET", "I-DIET",
+    "B-EXAMPLE", "I-EXAMPLE",
+    "B-EXCLUDED", "I-EXCLUDED",
+    "B-POSSIBLE_SUBSTITUTE", 
+    "I-POSSIBLE_SUBSTITUTE",
+    "B-TRADE_NAME", "I-TRADE_NAME",
+    "B-PART", "I-PART",
+    "B-PURPOSE", "I-PURPOSE",
+    "B-TASTE", "I-TASTE",
+    "B-EXCLUSIVE",
+    "B-PROCESS", "I-PROCESS",
+    "I-PHYSICAL_QUALITY", "B-PHYSICAL_QUALITY",
+    "I-PROCESS", "B-PROCESS",
+    "I-COLOR", "I-UNIT"
+])]
 
-df = df[~df["labels"].isin(["B-DIET",
-                            "I-DIET",
-                            "B-EXAMPLE",
-                            "I-EXAMPLE",
-                            "B-EXCLUDED",
-                            "I-EXCLUDED",
-                            "B-POSSIBLE_SUBSTITUTE",
-                            "I-POSSIBLE_SUBSTITUTE",
-                            "B-TRADE_NAME",
-                            "I-TRADE_NAME",
-                            "B-PART",
-                            "I-PART",
-                            "B-PURPOSE",
-                            "I-PURPOSE",
-                            "B-TASTE",
-                            "I-TASTE",
-                            "B-EXCLUSIVE"])]
+# Group by sentence_id so each row is a sentence with lists of words and labels
+grouped = df.groupby("sentence_id").agg({
+    "words": list,
+    "labels": list
+}).reset_index()
 
+# Print unique labels to debug
+print("Unique labels after filtering:", df["labels"].unique())
 
+# Initialize tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
 
-df = df.sample(frac=1).reset_index(drop=True)
+# Convert labels to IDs
+label2id = {label: i for i, label in enumerate(df["labels"].unique())}
+id2label = {i: label for label, i in label2id.items()}
 
-
-
-train_data, eval_data = train_test_split(df, test_size=0.2, random_state=42)
-if __name__ == '__main__':
-    all_train_results = []
-    all_eval_results = []
-    # Configure the model
-    model_args = NERArgs()
-    model_args.train_batch_size = 16
-    model_args.eval_batch_size = 16
-    model_args.adam_epsilon = 1e-5
-    model_args.max_grad_norm = 1.0
-    model_args.max_seq_length = 128
-    model_args.evaluate_during_training = True
-    model_args.evaluate_each_epoch = True
-    model_args.classification_report = True
-    model_args.overwrite_output_dir = True
-    model_args.learning_rate = 2e-5
-  #  model_args.gradient_accumulation_steps = 1
-    model_args.num_train_epochs = 3
-    model_args.weight_decay = 0.01
-    model_args.config = {"dropout": 0.1}
-    model_args.optimizer = "AdamW"
-    model_args.wandb_project = "NER"
-
-
-    labels = df["labels"].unique().tolist()
-
-    model = NERModel(
-        "bert",
-        "bert-base-cased",
-        args=model_args,
-        use_cuda=torch.cuda.is_available(),
-        labels=labels,
+def tokenize_and_align_labels(examples):
+    tokenized_inputs = tokenizer(
+        examples["words"],
+        truncation=True,
+        max_length=128,
+        padding="max_length",
+        is_split_into_words=True
     )
-    model_args.use_deepspeed = False
+    
+    labels = []
+    for i, label in enumerate(examples["labels"]):
+        word_ids = tokenized_inputs.word_ids(batch_index=i)
+        previous_word_idx = None
+        label_ids = []
+        
+        for word_idx in word_ids:
+            if word_idx is None:
+                label_ids.append(-100)
+            elif word_idx != previous_word_idx:
+                # Convert label to string if it's not already
+                current_label = str(label[word_idx]) if isinstance(label, list) else str(label)
+                label_ids.append(label2id[current_label])
+            else:
+                label_ids.append(-100)
+            previous_word_idx = word_idx
+            
+        labels.append(label_ids)
+    
+    tokenized_inputs["labels"] = labels
+    return tokenized_inputs
 
+# Initialize KFold
+n_splits = 5
+kf = KFold(n_splits=n_splits, shuffle=True, random_state=42)
+
+# Store results for each fold
+fold_results = defaultdict(list)
+all_predictions = []
+all_true_labels = []
+
+# Perform k-fold cross validation
+for fold, (train_idx, val_idx) in enumerate(kf.split(grouped), 1):
+    print(f"\nTraining Fold {fold}/{n_splits}")
+    
+    # Split data
+    train_data = grouped.iloc[train_idx]
+    val_data = grouped.iloc[val_idx]
+    
+    # Convert to HuggingFace datasets
+    train_dataset = Dataset.from_pandas(train_data)
+    val_dataset = Dataset.from_pandas(val_data)
+    
+    # Tokenize datasets
+    tokenized_train = train_dataset.map(
+        tokenize_and_align_labels,
+        batched=True,
+        remove_columns=train_dataset.column_names
+    )
+    tokenized_val = val_dataset.map(
+        tokenize_and_align_labels,
+        batched=True,
+        remove_columns=val_dataset.column_names
+    )
+    
+    # Initialize model for this fold
+    model = AutoModelForTokenClassification.from_pretrained(
+        "bert-base-cased",
+        num_labels=len(df["labels"].unique())
+    ).to(device)
+    
+    # Training arguments
+    training_args = TrainingArguments(
+        output_dir=f"models/ner_model_fold_{fold}",
+        evaluation_strategy="epoch",
+        learning_rate=2e-5,
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
+        num_train_epochs=5,
+        weight_decay=0.01,
+        save_strategy="epoch",
+        load_best_model_at_end=True,
+        metric_for_best_model="eval_loss",
+        no_cuda=True,
+        use_mps_device=False,
+    )
+    
+    # Initialize trainer
+    trainer = Trainer(
+        model=model,
+        args=training_args,
+        train_dataset=tokenized_train,
+        eval_dataset=tokenized_val,
+        data_collator=DataCollatorForTokenClassification(tokenizer),
+    )
+    
     # Train the model
-    train_results = model.train_model(train_data, eval_data=eval_data)
+    train_results = trainer.train()
+    fold_results['train_loss'].append(train_results.training_loss)
+    
+    # Evaluate
+    eval_results = trainer.evaluate()
+    fold_results['eval_loss'].append(eval_results['eval_loss'])
+    
+    # Get predictions
+    predictions = trainer.predict(tokenized_val)
+    preds = np.argmax(predictions.predictions, axis=-1)
+    
+    # Flatten predictions and labels
+    flat_preds = []
+    flat_labels = []
+    for pred, label in zip(preds, predictions.label_ids):
+        mask = label != -100
+        flat_preds.extend(pred[mask])
+        flat_labels.extend(label[mask])
+    
+    # Convert numeric labels back to string labels
+    flat_preds = [id2label[pred] for pred in flat_preds]
+    flat_labels = [id2label[label] for label in flat_labels]
+    
+    # Store predictions and true labels
+    all_predictions.extend(flat_preds)
+    all_true_labels.extend(flat_labels)
+    
+    # Print fold results
+    print(f"\nFold {fold} Results:")
+    print(classification_report(flat_labels, flat_preds))
+    
+    # Save the model
+    trainer.save_model(f"models/ner_model_fold_{fold}")
+    print(f"Model for fold {fold} saved")
 
-    predictions, raw_outputs = model.predict(["Tartufo Pasta with garlic flavoured butter and olive oil, egg yolk, parmigiano and pasta water."])
+# Print overall results
+print("\nOverall Cross-Validation Results:")
+print("\nAverage Training Loss:", np.mean(fold_results['train_loss']))
+print("Average Evaluation Loss:", np.mean(fold_results['eval_loss']))
+print("\nOverall Classification Report:")
+print(classification_report(all_true_labels, all_predictions))
 
-    print(predictions)
+# Save overall results
+with open('cross_validation_results.json', 'w') as f:
+    results = {
+        'average_training_loss': float(np.mean(fold_results['train_loss'])),
+        'average_eval_loss': float(np.mean(fold_results['eval_loss'])),
+        'classification_report': classification_report(all_true_labels, all_predictions, output_dict=True)
+    }
+    json.dump(results, f, indent=2)
 
-    plt.figure()
-    plt.plot(train_results[1]["train_loss"], label="train")
-    plt.plot(train_results[1]["eval_loss"], label="eval")
-    plt.legend()
-    plt.show()
-    print("Done")
-    # save the model
-    model.save_model("models/ner_model")
-    print("Model saved")
+# Plot training results
+plt.figure(figsize=(12, 6))
+plt.plot(fold_results['train_loss'], label='Training Loss')
+plt.plot(fold_results['eval_loss'], label='Evaluation Loss')
+plt.xlabel('Fold')
+plt.ylabel('Loss')
+plt.title('Training and Evaluation Loss Across Folds')
+plt.legend()
+plt.savefig('cross_validation_losses.png')
+plt.close()
