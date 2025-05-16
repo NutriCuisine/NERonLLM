@@ -14,13 +14,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 from collections import defaultdict
 import json
+import os
 
-# Force CPU usage
-device = torch.device("cpu")
-torch.set_default_device(device)
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
 
 # Load and preprocess data
-df = pd.read_csv("/Users/kcb/PycharmProjects/NERonLLM/ner/helper/taste_iob.csv")
+project_path = os.path.dirname(os.path.abspath(__file__))
+print(f"Project path: {project_path}")
+df = pd.read_csv(project_path+"/dataset/taste_iob.csv")
 
 # Filter out unwanted labels
 df = df[~df["labels"].isin([
@@ -40,6 +43,24 @@ df = df[~df["labels"].isin([
     "I-COLOR", "I-UNIT"
 ])]
 
+# Save the filtered labels
+unique_labels = sorted(df["labels"].unique())
+label2id = {label: i for i, label in enumerate(unique_labels)}
+id2label = {i: label for label, i in label2id.items()}
+
+# Save label mappings
+label_mappings = {
+    "label2id": label2id,
+    "id2label": id2label,
+    "labels": list(unique_labels)  #
+}
+
+with open(os.path.join(project_path, "models/label_mappings.json"), "w") as f:
+    json.dump(label_mappings, f, indent=2)
+
+print("Saved label mappings to models/label_mappings.json")
+print("Available labels:", unique_labels)
+
 # Group by sentence_id so each row is a sentence with lists of words and labels
 grouped = df.groupby("sentence_id").agg({
     "words": list,
@@ -51,10 +72,6 @@ print("Unique labels after filtering:", df["labels"].unique())
 
 # Initialize tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
-
-# Convert labels to IDs
-label2id = {label: i for i, label in enumerate(df["labels"].unique())}
-id2label = {i: label for label, i in label2id.items()}
 
 def tokenize_and_align_labels(examples):
     tokenized_inputs = tokenizer(
@@ -133,13 +150,12 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(grouped), 1):
         learning_rate=2e-5,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=16,
-        num_train_epochs=5,
+        num_train_epochs=7,
         weight_decay=0.01,
         save_strategy="epoch",
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
-        no_cuda=True,
-        use_mps_device=False,
+        no_cuda=not torch.cuda.is_available()
     )
     
     # Initialize trainer
