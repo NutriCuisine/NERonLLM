@@ -3,6 +3,51 @@ import json
 import re
 from datetime import datetime
 
+def parse_classification_report(report_text):
+    """
+    Parse a classification report string into a dictionary.
+    
+    Args:
+        report_text (str): The classification report string
+        
+    Returns:
+        dict: Dictionary containing the parsed metrics
+    """
+    class_metrics = {}
+    
+    # Extract metrics for each class
+    lines = report_text.strip().split('\n')
+    for line in lines[2:-4]:  # Skip header and average lines
+        if line.strip():
+            parts = line.split()
+            if len(parts) >= 5:
+                class_name = parts[0]
+                class_metrics[class_name] = {
+                    'precision': float(parts[1]),
+                    'recall': float(parts[2]),
+                    'f1_score': float(parts[3]),
+                    'support': int(parts[4])
+                }
+    
+    # Extract average metrics
+    avg_lines = lines[-4:]
+    for line in avg_lines:
+        if 'avg' in line:
+            parts = line.split()
+            if len(parts) >= 5:
+                avg_type = parts[0] + '_' + parts[1]  # e.g., 'micro_avg'
+                try:
+                    class_metrics[avg_type] = {
+                        'precision': float(parts[2]),
+                        'recall': float(parts[3]),
+                        'f1_score': float(parts[4]),
+                        'support': int(parts[5])
+                    }
+                except (ValueError, IndexError):
+                    continue
+    
+    return class_metrics
+
 # Read the JSON file
 with open('training_results.json', 'r') as f:
     data = json.load(f)
@@ -23,34 +68,7 @@ for model in model_reports:
     for epoch in model['epoch_results']:
         # Parse classification report
         report_text = epoch['val_classification_report']
-        class_metrics = {}
-        
-        # Extract metrics for each class
-        lines = report_text.strip().split('\n')
-        for line in lines[2:-4]:  # Skip header and average lines
-            if line.strip():
-                parts = line.split()
-                if len(parts) >= 5:
-                    class_name = parts[0]
-                    class_metrics[f'{class_name}_precision'] = float(parts[1])
-                    class_metrics[f'{class_name}_recall'] = float(parts[2])
-                    class_metrics[f'{class_name}_f1'] = float(parts[3])
-                    class_metrics[f'{class_name}_support'] = int(parts[4])
-        
-        # Extract average metrics
-        avg_lines = lines[-4:]
-        for line in avg_lines:
-            if 'avg' in line:
-                parts = line.split()
-                if len(parts) >= 5:
-                    avg_type = parts[0] + '_' + parts[1]  # e.g., 'micro_avg'
-                    try:
-                        class_metrics[f'{avg_type}_precision'] = float(parts[2])
-                        class_metrics[f'{avg_type}_recall'] = float(parts[3])
-                        class_metrics[f'{avg_type}_f1'] = float(parts[4])
-                        class_metrics[f'{avg_type}_support'] = int(parts[5])
-                    except (ValueError, IndexError):
-                        continue
+        class_metrics = parse_classification_report(report_text)
         
         # Combine all metrics
         epoch_data = {
@@ -92,8 +110,8 @@ for _, row in ner_models.iterrows():
     report_lines.append(f"\n{row['model_name']}:")
     report_lines.append(f"  F1 Score: {row['val_f1']:.4f}")
     report_lines.append(f"  Accuracy: {row['val_accuracy']:.4f}")
-    report_lines.append(f"  Micro Avg F1: {row['micro_avg_f1']:.4f}")
-    report_lines.append(f"  Macro Avg F1: {row['macro_avg_f1']:.4f}")
+    report_lines.append(f"  Micro Avg F1: {row['micro_avg']['f1_score']:.4f}")
+    report_lines.append(f"  Macro Avg F1: {row['macro_avg']['f1_score']:.4f}")
 
 # 2. Performance Comparison
 report_lines.append("\n\nOverall Model Rankings")
@@ -109,14 +127,14 @@ for _, row in top_models.iterrows():
 report_lines.append("\n\nClass-wise Performance Analysis")
 report_lines.append("-" * 30)
 report_lines.append("\nBest performing model for each class:")
-class_metrics = ['f1']  # Focus on F1 score for clarity
-for metric in class_metrics:
-    for class_name in ['healthy', 'vegan', 'low-carb', 'gluten-free', 'nut-free', 'high-protein', 'low-sugar']:
-        col = f'{class_name}_{metric}'
-        best_model = best_epochs.nlargest(1, col).iloc[0]
+for class_name in ['healthy', 'vegan', 'low-carb', 'gluten-free', 'nut-free', 'high-protein', 'low-sugar']:
+    if class_name in best_epochs.columns:
+        # Get the best model for this class based on F1 score
+        best_model_idx = best_epochs[class_name].apply(lambda x: x['f1_score']).idxmax()
+        best_model = best_epochs.loc[best_model_idx]
         report_lines.append(f"\n{class_name}:")
         report_lines.append(f"  Best Model: {best_model['model_name']} (NER: {'Yes' if best_model['ner_flag'] else 'No'})")
-        report_lines.append(f"  F1 Score: {best_model[col]:.4f}")
+        report_lines.append(f"  F1 Score: {best_model[class_name]['f1_score']:.4f}")
 
 # 4. NER Impact Summary
 report_lines.append("\n\nNER Impact Summary")

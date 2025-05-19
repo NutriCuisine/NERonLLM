@@ -17,6 +17,30 @@ from tqdm import tqdm
 import os
 from approximate_randomization import chanceByChanceDataFrame
 from ner.predict import NERPredictor
+import numpy as np
+import warnings
+warnings.filterwarnings('ignore')
+
+
+class EarlyStopping:
+    def __init__(self, patience=3, min_delta=0):
+        self.patience = patience
+        self.min_delta = min_delta
+        self.counter = 0
+        self.best_loss = None
+        self.early_stop = False
+        self.val_loss_min = np.Inf
+
+    def __call__(self, val_loss):
+        if self.best_loss is None:
+            self.best_loss = val_loss
+        elif val_loss > self.best_loss - self.min_delta:
+            self.counter += 1
+            if self.counter >= self.patience:
+                self.early_stop = True
+        else:
+            self.best_loss = val_loss
+            self.counter = 0
 
 
 class MultiLabel:
@@ -42,7 +66,6 @@ class MultiLabel:
             'vegan',
             'low-carb',
             'gluten-free',
-            'nut-free',
             'high-protein',
             'low-sugar'
         ]
@@ -267,6 +290,8 @@ class MultiLabel:
 
                 # Training loop
                 best_f1 = 0
+                early_stopping = EarlyStopping(patience=3, min_delta=0.001)
+                
                 for epoch in range(self.config["num_epochs"]):
                     # Training phase
                     model.train()
@@ -289,6 +314,9 @@ class MultiLabel:
 
                         # Update progress bar with current loss
                         train_pbar.set_postfix({'loss': f'{loss.item():.4f}'})
+
+                    avg_train_loss = total_loss / len(train_loader)
+                    print(f"\nEpoch {epoch + 1} - Average Training Loss: {avg_train_loss:.4f}")
 
                     # Validation phase
                     model.eval()
@@ -313,6 +341,15 @@ class MultiLabel:
                             val_preds.extend(preds.cpu().numpy())
                             val_labels.extend(labels.cpu().numpy())
 
+                    avg_val_loss = val_loss / len(val_loader)
+                    print(f"Epoch {epoch + 1} - Average Validation Loss: {avg_val_loss:.4f}")
+
+                    # Early stopping check
+                    early_stopping(avg_val_loss)
+                    if early_stopping.early_stop:
+                        print(f"\nEarly stopping triggered at epoch {epoch + 1}")
+                        break
+
                     # Calculate validation metrics
                     val_f1 = f1_score(val_labels, val_preds, average='samples')
                     val_precision = precision_score(val_labels, val_preds, average='samples')
@@ -321,30 +358,20 @@ class MultiLabel:
                     val_accuracy = accuracy_score(val_labels, val_preds)
                     val_h_loss = hamming_loss(val_labels, val_preds)
 
-                    print(f"\nEpoch {epoch + 1}/{self.config['num_epochs']} Results:")
-                    print(f"Training Loss: {total_loss/len(train_loader):.4f}")
-                    print(f"Validation Loss: {val_loss/len(val_loader):.4f}")
-                    print("\nValidation Metrics:")
-                    print(f"F1 Score: {val_f1:.4f}")
-                    print(f"Precision: {val_precision:.4f}")
-                    print(f"Recall: {val_recall:.4f}")
-                    print(f"Accuracy: {val_accuracy:.4f}")
-                    print(f"Hamming Loss: {val_h_loss:.4f}")
-                    print("\nValidation Classification Report:")
-                    print(classification_report(val_labels, val_preds, target_names=self.filtered_list))
-                    print("-" * 50)
-
                     # Store epoch results
                     epoch_result = {
                         "epoch": epoch + 1,
-                        "train_loss": total_loss / len(train_loader),
-                        "val_loss": val_loss / len(val_loader),
+                        "train_loss": avg_train_loss,
+                        "val_loss": avg_val_loss,
                         "val_f1": val_f1,
                         "val_precision": val_precision,
                         "val_recall": val_recall,
                         "val_accuracy": val_accuracy,
                         "val_h_loss": val_h_loss,
-                        "val_classification_report": classification_report(val_labels, val_preds, target_names=self.filtered_list)
+                        "val_classification_report": classification_report(val_labels,
+                                                                           val_preds,
+                                                                           target_names=self.filtered_list,
+                                                                           output_dict=True)
                     }
                     model_report["epoch_results"].append(epoch_result)
 
@@ -383,16 +410,6 @@ class MultiLabel:
                 test_recall = recall_score(test_labels, test_preds, average='samples')
                 test_accuracy = accuracy_score(test_labels, test_preds)
                 test_h_loss = hamming_loss(test_labels, test_preds)
-
-                print("\nTest Set Results:")
-                print(f"F1 Score: {test_f1:.4f}")
-                print(f"Precision: {test_precision:.4f}")
-                print(f"Recall: {test_recall:.4f}")
-                print(f"Accuracy: {test_accuracy:.4f}")
-                print(f"Hamming Loss: {test_h_loss:.4f}")
-                print("\nTest Set Classification Report:")
-                print(classification_report(test_labels, test_preds, target_names=self.filtered_list))
-
                 # Store final test results
                 model_report["test_results"] = {
                     "test_f1": test_f1,
@@ -400,7 +417,10 @@ class MultiLabel:
                     "test_recall": test_recall,
                     "test_accuracy": test_accuracy,
                     "test_h_loss": test_h_loss,
-                    "test_classification_report": classification_report(test_labels, test_preds, target_names=self.filtered_list)
+                    "test_classification_report": classification_report(test_labels,
+                                                                        test_preds,
+                                                                        target_names=self.filtered_list,
+                                                                        output_dict=True)
                 }
 
                 # After final test evaluation, store metrics for comparison
@@ -413,6 +433,25 @@ class MultiLabel:
                     'accuracy': float(test_accuracy),
                     'hamming_loss': float(test_h_loss)
                 })
+
+                # Add per-class metrics for comparison
+                per_class_metrics = {}
+                # Convert lists to numpy arrays
+                test_labels_array = np.array(test_labels)
+                test_preds_array = np.array(test_preds)
+                
+                for i, label in enumerate(self.filtered_list):
+                    label_f1 = f1_score(test_labels_array[:, i], test_preds_array[:, i])
+                    label_precision = precision_score(test_labels_array[:, i], test_preds_array[:, i])
+                    label_recall = recall_score(test_labels_array[:, i], test_preds_array[:, i])
+                    
+                    per_class_metrics[label] = {
+                        'f1_score': float(label_f1),
+                        'precision': float(label_precision),
+                        'recall': float(label_recall)
+                    }
+                
+                comparison_data[-1]['per_class_metrics'] = per_class_metrics
 
                 # Add model report to final reports
                 final_reports.append(model_report)
@@ -434,6 +473,7 @@ class MultiLabel:
             model_df = comparison_df[comparison_df['model'] == model_name]
             model_results = {}
             
+            # Overall metrics comparison
             for metric in metrics:
                 p_value = chanceByChanceDataFrame(
                     model_df,
@@ -466,6 +506,34 @@ class MultiLabel:
                 else:
                     print(f"  - No statistically significant difference in {metric}")
             
+            # Per-class comparison
+            print("\nPer-Class Comparison:")
+            print(f"{'='*30}")
+            
+            per_class_results = {}
+            for label in self.filtered_list:
+                print(f"\nLabel: {label}")
+                class_results = {}
+                
+                for metric in ['f1_score', 'precision', 'recall']:
+                    with_ner_value = model_df[model_df['approach'] == 'with_ner']['per_class_metrics'].iloc[0][label][metric]
+                    without_ner_value = model_df[model_df['approach'] == 'without_ner']['per_class_metrics'].iloc[0][label][metric]
+                    diff = with_ner_value - without_ner_value
+                    
+                    class_results[metric] = {
+                        'with_ner': with_ner_value,
+                        'without_ner': without_ner_value,
+                        'difference': diff
+                    }
+                    
+                    print(f"{metric}:")
+                    print(f"  - With NER: {with_ner_value:.4f}")
+                    print(f"  - Without NER: {without_ner_value:.4f}")
+                    print(f"  - Difference: {diff:.4f} ({'+' if diff > 0 else ''}{diff:.4f})")
+                
+                per_class_results[label] = class_results
+            
+            model_results['per_class_comparison'] = per_class_results
             comparison_results[model_name] = model_results
 
         # Save all results to a JSON file
@@ -486,13 +554,13 @@ if __name__ == "__main__":
     print("CUDA available:", torch.cuda.is_available())
 
     config = {
-        "batch_size": 8,
-        "num_epochs": 5,
+        "batch_size": 16,
+        "num_epochs": 6,
         "dataset_path": project_path + "/datasets/",
         "model_names": [
-            "bert-base-uncased",
             "FacebookAI/roberta-base",
-            "distilbert/distilbert-base-uncased"
+            "distilbert/distilbert-base-uncased",
+            "bert-base-uncased"
         ],
     }
     ml = MultiLabel(config=config)
